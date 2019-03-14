@@ -4,6 +4,7 @@ import "testing"
 import "fmt"
 
 func TestFirstTry(t *testing.T) {
+	// 以下都是赋值写法
 	var a int = 1
 	var b int = 1
 	// var (
