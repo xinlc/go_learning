@@ -13,6 +13,7 @@ type Employee struct {
 }
 
 // 通常为力避免内存拷贝我们使用这种定义方式
+// (e *Employee) 是绑定到结构上
 func (e *Employee) String() string {
 	fmt.Printf("Address is %x", unsafe.Pointer(&e.Name))
 	fmt.Println()
