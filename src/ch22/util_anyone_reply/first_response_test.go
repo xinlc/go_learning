@@ -29,9 +29,27 @@ func FirstResponse() string {
 	return <-ch // 只要chan有数据 就返回, 注意：会有协程泄露，因为只有一个chan数据被取走，其他的没人取走协程被阻塞, 采用buffe chan可以防止协程序泄露
 }
 
+func AllResponse() string {
+	numOfRunner := 10
+	ch := make(chan string, numOfRunner) // 防止协程泄露
+	for i := 0; i < numOfRunner; i++ {
+		go func(i int) {
+			ret := runTask(i)
+			ch <- ret
+		}(i)
+	}
+	finalRet := ""
+	for j := 0; j < numOfRunner; j++ {
+		finalRet += <-ch + "\n"
+	}
+	return finalRet
+
+}
+
 func TestFirstResponse(t *testing.T) {
 	fmt.Println("Before:", runtime.NumGoroutine()) // 打出协程数
 	fmt.Println(FirstResponse())
+	// fmt.Println(AllResponse())
 	time.Sleep(time.Second * 1)
 	fmt.Println("After:", runtime.NumGoroutine())
 }
