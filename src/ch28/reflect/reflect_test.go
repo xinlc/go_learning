@@ -58,3 +58,21 @@ func TestInvokeByName(t *testing.T) {
 	fmt.Println("Updated Age:", e)
 
 }
+
+func TestDeepEqual(t *testing.T) {
+	a := map[int]string{1: "one", 2: "two", 3: "three"}
+	b := map[int]string{1: "one", 2: "two", 3: "three"}
+	// fmt.Println(a == b)
+	fmt.Println(reflect.DeepEqual(a, b))
+
+	s1 := []int{1, 2, 3}
+	s2 := []int{1, 2, 3}
+	s3 := []int{4, 2, 3}
+
+	fmt.Println(reflect.DeepEqual(s1, s2))
+	fmt.Println(reflect.DeepEqual(s2, s3))
+
+	c1 := Customer{"1", "Mike", 40}
+	c2 := Customer{"1", "Mike", 40}
+	fmt.Println(reflect.DeepEqual(c1, c2))
+}
