@@ -16,6 +16,7 @@ var jsonStr = `{
 	}
 }`
 
+// 不建议用，用了反射 性能很低
 func TestEmbeddedJson(t *testing.T) {
 	e := new(Employee)
 	err := json.Unmarshal([]byte(jsonStr), e)
